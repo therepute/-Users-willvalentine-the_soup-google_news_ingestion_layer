@@ -1,0 +1,23 @@
+# requirements.txt - Gmail Alert System Dependencies
+
+# Gmail API
+google-auth>=2.22.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+google-api-python-client>=2.95.0
+
+# Configuration
+toml>=0.10.2
+
+# Database
+supabase>=1.0.0
+
+# Email parsing (if needed)
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# HTTP requests (if needed for parsing links)
+requests>=2.31.0
+
+# Optional: Better logging
+structlog>=23.1.0
