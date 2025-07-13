@@ -85,10 +85,18 @@ class GmailClient:
                         "credentials.json not found. Please download OAuth credentials from Google Cloud Console "
                         "or ensure Service Account credentials are properly configured in secrets.toml"
                     )
-                
                 flow = InstalledAppFlow.from_client_secrets_file(
                     'credentials.json', self.SCOPES)
-                creds = flow.run_local_server(port=0)
+                # Debug info
+                import json
+                with open('credentials.json', 'r') as f:
+                    creds_json = json.load(f)
+                    print("Configured redirect URIs:", creds_json['installed'].get('redirect_uris', []))
+                print(f"OAuth flow redirect URI: {getattr(flow, 'redirect_uri', 'Not set')}")
+                print(f"About to start local server...")
+                print(f"OAuth Client ID: {self.config.get('google_client_id', 'Not set')}")
+                print(f"Using service account? {any(str(key).startswith('google_') for key in self.config.keys())}")
+                creds = flow.run_local_server(port=8501)
             
             with open(token_file, 'wb') as token:
                 pickle.dump(creds, token)

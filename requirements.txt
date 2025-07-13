@@ -8,6 +8,7 @@ google-api-python-client>=2.95.0
 
 # Configuration
 toml>=0.10.2
+python-dotenv>=1.0.0
 
 # Database
 supabase>=1.0.0
