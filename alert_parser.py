@@ -122,35 +122,66 @@ class AlertParser:
         source = 'Unknown'
         snippet = ''
         
-        # Navigate up to find the table cell or div containing this article
-        parent = link_element.parent
-        article_container = None
+        # Get the headline text
+        headline = link_element.get_text(strip=True)
         
-        # Find the containing article block
-        for _ in range(5):  # Look up to 5 levels up
-            if parent and parent.name in ['td', 'div', 'table']:
-                article_container = parent
-                break
-            parent = parent.parent if parent else None
+        # Method 1: Extract from headline if it contains ' - [Publication]' pattern
+        if ' - ' in headline:
+            parts = headline.split(' - ')
+            if len(parts) >= 2:
+                # Publication is usually the last part after ' - '
+                potential_source = parts[-1].strip()
+                # Clean up common patterns
+                if potential_source and len(potential_source) < 100:
+                    # Remove trailing '...' if present
+                    potential_source = potential_source.rstrip('.')
+                    # Remove duplicate words (e.g., "CBS News CBS News" -> "CBS News")
+                    words = potential_source.split()
+                    if len(words) > 1 and len(words) % 2 == 0:
+                        mid = len(words) // 2
+                        if words[:mid] == words[mid:]:
+                            # If first half equals second half, take only first half
+                            potential_source = ' '.join(words[:mid])
+                    source = potential_source
         
-        if article_container:
-            # Look for source (usually in a font tag or immediately after the link)
-            text_content = article_container.get_text(separator=' ', strip=True)
-            lines = text_content.split('\n')
+        # Method 2: Look in surrounding text content for publication patterns
+        if source == 'Unknown':
+            # Navigate up to find the table cell or div containing this article
+            parent = link_element.parent
+            article_container = None
             
-            for i, line in enumerate(lines):
-                line = line.strip()
-                if link_element.get_text(strip=True) in line:
-                    # Source is often the next line
-                    if i + 1 < len(lines):
-                        potential_source = lines[i + 1].strip()
-                        if potential_source and len(potential_source) < 100:
-                            source = potential_source
-                    
-                    # Snippet is often after the source
-                    if i + 2 < len(lines):
-                        snippet = lines[i + 2].strip()
+            # Find the containing article block
+            for _ in range(5):  # Look up to 5 levels up
+                if parent and parent.name in ['td', 'div', 'table']:
+                    article_container = parent
                     break
+                parent = parent.parent if parent else None
+            
+            if article_container:
+                # Get all text and look for publication patterns
+                text_content = article_container.get_text(separator=' ', strip=True)
+                
+                # Look for common publication patterns after headlines
+                import re
+                # Pattern: headline followed by publication name
+                headline_escaped = re.escape(headline[:50])  # Use first 50 chars
+                pattern = rf'{headline_escaped}.*?\s+([A-Z][A-Za-z\s]+(?:News|Times|Post|Herald|Tribune|Journal|Magazine|Report|Today))'
+                match = re.search(pattern, text_content)
+                if match:
+                    source = match.group(1).strip()
+                
+                # Look for snippet in the remaining text
+                lines = text_content.split('\n')
+                for i, line in enumerate(lines):
+                    line = line.strip()
+                    if headline[:30] in line:  # Find line with headline
+                        # Snippet is often a few lines after
+                        for j in range(i + 1, min(i + 4, len(lines))):
+                            potential_snippet = lines[j].strip()
+                            if potential_snippet and len(potential_snippet) > 20 and 'Flag as irrelevant' not in potential_snippet:
+                                snippet = potential_snippet
+                                break
+                        break
         
         return source, snippet
     

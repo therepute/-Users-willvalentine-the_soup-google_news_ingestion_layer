@@ -60,7 +60,7 @@ class SoupPusher:
             'title': article_data.get('headline', ''),           # Article headline
             'permalink_url': article_data.get('story_link', ''), # Article URL
             'published_at': self._parse_date(article_data.get('date')), # Article publish date
-            'source_title': article_data.get('publication', ''), # Publication name (CNN, etc.)
+            'publication': article_data.get('publication', ''),     # Publication name (HelpNet Security, ETV Bharat, etc.)
             'source_url': None,                                  # Not available from Gmail alerts
             'language': 'en',                                    # Assume English
             'summary': article_data.get('body', ''),             # Article snippet

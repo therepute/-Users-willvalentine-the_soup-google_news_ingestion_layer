@@ -62,45 +62,37 @@ class GmailClient:
                     credentials = credentials.with_subject(self.config['delegate_email'])
                 
                 return build('gmail', 'v1', credentials=credentials)
-                
             else:
-                raise Exception("No valid authentication method available")
+                raise Exception("Neither OAuth nor Service Account credentials properly configured")
     
     def _oauth_authenticate(self):
-        """Original OAuth authentication method"""
+        """Authenticate using OAuth flow"""
         creds = None
-        token_file = 'token.pickle'
         
-        if os.path.exists(token_file):
-            with open(token_file, 'rb') as token:
+        # Token file stores the user's access and refresh tokens
+        if os.path.exists('token.pickle'):
+            with open('token.pickle', 'rb') as token:
                 creds = pickle.load(token)
-                
+        
+        # If there are no (valid) credentials available, let the user log in
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
+                logger.info("Refreshing expired credentials")
                 creds.refresh(Request())
             else:
-                # Check if credentials.json exists
+                logger.info("Starting OAuth flow")
                 if not os.path.exists('credentials.json'):
-                    raise FileNotFoundError(
-                        "credentials.json not found. Please download OAuth credentials from Google Cloud Console "
-                        "or ensure Service Account credentials are properly configured in secrets.toml"
-                    )
+                    raise Exception("credentials.json file not found. Please download it from Google Cloud Console.")
+                
                 flow = InstalledAppFlow.from_client_secrets_file(
                     'credentials.json', self.SCOPES)
-                # Debug info
-                import json
-                with open('credentials.json', 'r') as f:
-                    creds_json = json.load(f)
-                    print("Configured redirect URIs:", creds_json['installed'].get('redirect_uris', []))
-                print(f"OAuth flow redirect URI: {getattr(flow, 'redirect_uri', 'Not set')}")
-                print(f"About to start local server...")
-                print(f"OAuth Client ID: {self.config.get('google_client_id', 'Not set')}")
-                print(f"Using service account? {any(str(key).startswith('google_') for key in self.config.keys())}")
+                # Use fixed port 8501 to match OAuth configuration
                 creds = flow.run_local_server(port=8501)
             
-            with open(token_file, 'wb') as token:
+            # Save the credentials for the next run
+            with open('token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
-                
+        
         return build('gmail', 'v1', credentials=creds)
     
     def _get_or_create_label(self, label_name):
@@ -181,7 +173,7 @@ class GmailClient:
         return body
     
     def mark_as_processed(self, message_id):
-        """Mark email as processed and archive it"""
+        """Mark email as processed and archive it (deprecated - use delete_email instead)"""
         try:
             # Add both processed and archive labels, remove from inbox
             self.service.users().messages().modify(
@@ -196,3 +188,150 @@ class GmailClient:
         except Exception as e:
             logger.error(f"Error marking email as processed and archived: {str(e)}")
             return False
+    
+    def delete_email(self, message_id):
+        """Permanently delete an email after successful import"""
+        try:
+            # Use trash() first, then immediately expunge to permanently delete
+            # This ensures it bypasses Gmail's normal trash retention
+            self.service.users().messages().trash(userId='me', id=message_id).execute()
+            # Note: Gmail API doesn't allow immediate permanent deletion in one step
+            # The daily purge will clean up the trash
+            logger.info(f"Successfully deleted email {message_id} (moved to trash)")
+            return True
+        except Exception as e:
+            logger.error(f"Error deleting email {message_id}: {str(e)}")
+            return False
+    
+    def daily_purge_trash(self):
+        """Daily purge of trash - permanently delete emails older than 7 days from trash"""
+        try:
+            # Calculate date 7 days ago for trash purging
+            week_ago = datetime.now() - timedelta(days=7)
+            date_str = week_ago.strftime('%Y/%m/%d')
+            
+            # Search for emails in trash older than 7 days
+            query = f'in:trash before:{date_str}'
+            
+            logger.info(f"Starting daily trash purge for emails before {date_str}")
+            
+            results = self.service.users().messages().list(
+                userId='me', q=query, maxResults=1000).execute()
+            
+            messages = results.get('messages', [])
+            purged_count = 0
+            
+            if not messages:
+                logger.info("No old emails found in trash to purge")
+                return 0
+            
+            logger.info(f"Found {len(messages)} emails in trash older than 7 days")
+            
+            # Process in smaller batches for trash purging
+            batch_size = 25  # Smaller batches for permanent deletion
+            for i in range(0, len(messages), batch_size):
+                batch = messages[i:i + batch_size]
+                
+                for message in batch:
+                    try:
+                        # Permanently delete from trash (this is irreversible)
+                        self.service.users().messages().delete(userId='me', id=message['id']).execute()
+                        purged_count += 1
+                        
+                    except Exception as e:
+                        logger.warning(f"Error permanently deleting email {message['id']} from trash: {e}")
+                        continue
+                
+                # Longer delay between batches for permanent deletion operations
+                import time
+                time.sleep(1.0)
+            
+            logger.info(f"Daily trash purge completed: {purged_count} emails permanently deleted")
+            return purged_count
+            
+        except Exception as e:
+            logger.error(f"Error during daily trash purge: {str(e)}")
+            return 0
+    
+    def weekly_cleanup_non_google_alerts(self):
+        """Delete emails that are NOT from Google Alerts and older than 7 days"""
+        try:
+            # Calculate date 7 days ago
+            week_ago = datetime.now() - timedelta(days=7)
+            date_str = week_ago.strftime('%Y/%m/%d')
+            
+            # Search for emails NOT from Google Alerts and older than 7 days
+            query = f'-from:googlealerts-noreply@google.com before:{date_str}'
+            
+            logger.info(f"Starting weekly cleanup of non-Google Alert emails before {date_str}")
+            
+            results = self.service.users().messages().list(
+                userId='me', q=query, maxResults=500).execute()
+            
+            messages = results.get('messages', [])
+            deleted_count = 0
+            
+            if not messages:
+                logger.info("No old non-Google Alert emails found to delete")
+                return 0
+            
+            # Process in batches to avoid rate limits
+            batch_size = 50
+            for i in range(0, len(messages), batch_size):
+                batch = messages[i:i + batch_size]
+                
+                for message in batch:
+                    try:
+                        # Get email details for logging
+                        msg = self.service.users().messages().get(
+                            userId='me', id=message['id'], format='metadata').execute()
+                        
+                        headers = {h['name']: h['value'] for h in msg['payload'].get('headers', [])}
+                        subject = headers.get('Subject', 'No Subject')[:50]
+                        from_addr = headers.get('From', 'Unknown')
+                        
+                        # Delete the email
+                        if self.delete_email(message['id']):
+                            deleted_count += 1
+                            logger.debug(f"Deleted: {subject} from {from_addr}")
+                        
+                    except Exception as e:
+                        logger.warning(f"Error processing email {message['id']} for deletion: {e}")
+                        continue
+                
+                # Small delay between batches to respect rate limits
+                import time
+                time.sleep(0.5)
+            
+            logger.info(f"Weekly cleanup completed: {deleted_count} non-Google Alert emails deleted")
+            return deleted_count
+            
+        except Exception as e:
+            logger.error(f"Error during weekly cleanup: {str(e)}")
+            return 0
+    
+    def get_email_stats(self):
+        """Get statistics about email counts for monitoring"""
+        try:
+            stats = {}
+            
+            # Count Google Alert emails
+            google_results = self.service.users().messages().list(
+                userId='me', q='from:googlealerts-noreply@google.com').execute()
+            stats['google_alerts'] = len(google_results.get('messages', []))
+            
+            # Count processed Google Alerts
+            processed_results = self.service.users().messages().list(
+                userId='me', q=f'label:{self.processed_label_id}').execute()
+            stats['processed_alerts'] = len(processed_results.get('messages', []))
+            
+            # Count total emails
+            total_results = self.service.users().messages().list(
+                userId='me', maxResults=1).execute()
+            stats['total_emails'] = total_results.get('resultSizeEstimate', 0)
+            
+            return stats
+            
+        except Exception as e:
+            logger.error(f"Error getting email stats: {str(e)}")
+            return {}
