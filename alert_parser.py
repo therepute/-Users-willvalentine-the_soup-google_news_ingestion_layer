@@ -45,7 +45,6 @@ class AlertParser:
             article_data = {
                 'headline': article['headline'],
                 'story_link': article['link'],
-                'publication': article['source'],
                 'body': article['snippet'],
                 'source': 'Google Alert',
                 'search': search_term,
@@ -118,107 +117,44 @@ class AlertParser:
         return google_url
     
     def _extract_context(self, link_element):
-        """Extract source publication and snippet from surrounding elements"""
-        source = 'Unknown'
+        """Extract snippet from surrounding elements"""
         snippet = ''
         
         # Get the headline text
         headline = link_element.get_text(strip=True)
         
-        # Method 1: Look for schema.org publisher markup (most reliable)
-        # Navigate up to find the containing article or table row
+        # Early filtering: Skip non-legitimate content
+        link_url = link_element.get('href', '')
+        if any(domain in link_url.lower() for domain in ['youtube.com', 'facebook.com', 'm.facebook.com']):
+            return '', snippet
+        
+        # Look for snippet in the description div
         container = link_element
         for _ in range(10):  # Look up to 10 levels up
             container = container.parent
             if not container:
                 break
             
-            # Look for schema.org publisher in this container
-            publisher_div = container.find('div', {'itemprop': 'publisher'})
-            if publisher_div:
-                name_span = publisher_div.find('span', {'itemprop': 'name'})
-                if name_span:
-                    potential_source = name_span.get_text(strip=True)
-                    if potential_source and len(potential_source) < 100:
-                        source = potential_source
-                        break
-        
-        # Method 2: Extract from headline if it contains ' - [Publication]' pattern (existing method)
-        if source == 'Unknown' and ' - ' in headline:
-            parts = headline.split(' - ')
-            if len(parts) >= 2:
-                # Publication is usually the last part after ' - '
-                potential_source = parts[-1].strip()
-                # Clean up common patterns
-                if potential_source and len(potential_source) < 100:
-                    # Remove trailing '...' if present
-                    potential_source = potential_source.rstrip('.')
-                    # Remove duplicate words (e.g., "CBS News CBS News" -> "CBS News")
-                    words = potential_source.split()
-                    if len(words) > 1 and len(words) % 2 == 0:
-                        mid = len(words) // 2
-                        if words[:mid] == words[mid:]:
-                            # If first half equals second half, take only first half
-                            potential_source = ' '.join(words[:mid])
-                    source = potential_source
-        
-        # Method 3: Look for text content publication patterns (enhanced)
-        if source == 'Unknown':
-            # Navigate up to find the table cell or div containing this article
-            parent = link_element.parent
-            article_container = None
+            desc_div = container.find('div', {'itemprop': 'description'})
+            if desc_div:
+                snippet = desc_div.get_text(strip=True)
+                break
             
-            # Find the containing article block
-            for _ in range(5):  # Look up to 5 levels up
-                if parent and parent.name in ['td', 'div', 'table']:
-                    article_container = parent
+            # Fallback: look for snippet in the remaining text
+            text_content = container.get_text(separator=' ', strip=True)
+            lines = text_content.split('\n')
+            for i, line in enumerate(lines):
+                line = line.strip()
+                if headline[:30] in line:  # Find line with headline
+                    # Snippet is often a few lines after
+                    for j in range(i + 1, min(i + 4, len(lines))):
+                        potential_snippet = lines[j].strip()
+                        if potential_snippet and len(potential_snippet) > 20 and 'Flag as irrelevant' not in potential_snippet:
+                            snippet = potential_snippet
+                            break
                     break
-                parent = parent.parent if parent else None
-            
-            if article_container:
-                # Get all text and look for publication patterns
-                text_content = article_container.get_text(separator=' ', strip=True)
-                
-                # Enhanced publication patterns
-                patterns = [
-                    # Look for known publication names
-                    r'\b(Reuters|CNN|BBC|NBC|CBS|ABC|Fox News|CNBC|Bloomberg|Wall Street Journal|New York Times|Washington Post|USA Today|Associated Press|AP News|Forbes|TechCrunch|Wired|Verge|Axios|Politico|NPR|PBS|Guardian|Independent|Telegraph|Times|Post|Herald|Tribune|Journal|Magazine|Report|Today|Insider|Business Insider|MeriTalk|ETV Bharat|HelpNet Security)\b',
-                    # Look for publication after headline
-                    rf'{re.escape(headline[:50])}.*?\s+([A-Z][A-Za-z\s&]+(?:News|Times|Post|Herald|Tribune|Journal|Magazine|Report|Today|Insider|CNBC|Reuters|Bloomberg|TechCrunch|Forbes|Wired|Verge|Axios))',
-                    # Look for pattern like "Source: Publication"
-                    r'(?:Source:|By:|From:)\s*([A-Z][A-Za-z\s&]+)',
-                    # Look for publications in parentheses or after dashes
-                    r'[-\(]\s*([A-Z][A-Za-z\s&]+(?:News|Times|Post|Herald|Tribune|Journal|Magazine|Report|Today|Insider))\s*[\)\-]',
-                ]
-                
-                for pattern in patterns:
-                    match = re.search(pattern, text_content, re.IGNORECASE)
-                    if match:
-                        potential_source = match.group(1).strip()
-                        # Validate the source isn't too long or contains weird characters
-                        if potential_source and len(potential_source) < 50 and not any(char in potential_source for char in ['<', '>', '{', '}', '[', ']']):
-                            source = potential_source
-                            break
-                
-                # Look for snippet in the description div
-                desc_div = article_container.find('div', {'itemprop': 'description'})
-                if desc_div:
-                    snippet = desc_div.get_text(strip=True)
-                else:
-                    # Fallback: look for snippet in the remaining text
-                    lines = text_content.split('\n')
-                    for i, line in enumerate(lines):
-                        line = line.strip()
-                        if headline[:30] in line:  # Find line with headline
-                            # Snippet is often a few lines after
-                            for j in range(i + 1, min(i + 4, len(lines))):
-                                potential_snippet = lines[j].strip()
-                                if potential_snippet and len(potential_snippet) > 20 and 'Flag as irrelevant' not in potential_snippet:
-                                    snippet = potential_snippet
-                                    break
-                            break
         
-        return source, snippet
+        return '', snippet
     
     def _parse_date(self, date_string):
         """Parse email date to ISO format"""

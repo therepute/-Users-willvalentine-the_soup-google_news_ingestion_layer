@@ -266,7 +266,6 @@ class MeshScraper:
                         'created_at': datetime.now().isoformat(), # Time/date of scraping
                         'id': link,                              # Story link as ID
                         'subscription_source': f'GN_{client_name}_{search_term}',  # GN_[Client]_[Search Term]
-                        'publication': outlet_name,              # Keep for reference
                         'body': snippet,                         # Article snippet
                         'search_term': search_term,              # For filtering/debugging
                         'outlet_domain': domain,                 # For debugging (now defined)
@@ -274,14 +273,14 @@ class MeshScraper:
                     }
                     
                     # Only add if we have minimum required fields
-                    if headline and link and outlet_name:
+                    if headline and link:
                         articles.append(article)
                 
                 except Exception as e:
                     logger.warning(f"Error parsing result {i}: {e}")
                     continue
             
-            logger.info(f"Scraped {len(articles)} articles from {outlet_name} for '{search_term}'")
+            logger.info(f"Scraped {len(articles)} articles from {domain} for '{search_term}'")
             return articles
             
         except requests.RequestException as e:

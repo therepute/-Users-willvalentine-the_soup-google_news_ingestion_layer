@@ -60,7 +60,7 @@ class SoupPusher:
             'title': article_data.get('headline', ''),           # Article headline
             'permalink_url': article_data.get('story_link', ''), # Article URL
             'published_at': self._parse_date(article_data.get('date')), # Article publish date
-            'publication': article_data.get('publication', ''),     # Publication name (HelpNet Security, ETV Bharat, etc.)
+            'publication': None,                                 # Publication name no longer required
             'source': article_data.get('source', ''),            # Source (e.g., "Google Alert")
             'source_url': None,                                  # Not available from Gmail alerts
             'language': 'en',                                    # Assume English
@@ -71,7 +71,7 @@ class SoupPusher:
             'actor_name': None,                                  # Not available from Gmail alerts
             'actor_profile_url': None,                           # Not available from Gmail alerts
             'object_title': article_data.get('headline', ''),    # Same as title
-            'object_type': 'article',                            # Always article
+            'object_type': 'article',                           # Fixed value
             'subscription_source': f"GN_CL_{article_data.get('search', 'unknown')}", # GN_CL_[Search Term]
             'total_articles_count': None,                        # Will be set by trigger
             'daily_articles_count': None,                        # Will be set by trigger
