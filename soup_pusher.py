@@ -61,6 +61,7 @@ class SoupPusher:
             'permalink_url': article_data.get('story_link', ''), # Article URL
             'published_at': self._parse_date(article_data.get('date')), # Article publish date
             'publication': article_data.get('publication', ''),     # Publication name (HelpNet Security, ETV Bharat, etc.)
+            'source': article_data.get('source', ''),            # Source (e.g., "Google Alert")
             'source_url': None,                                  # Not available from Gmail alerts
             'language': 'en',                                    # Assume English
             'summary': article_data.get('body', ''),             # Article snippet
