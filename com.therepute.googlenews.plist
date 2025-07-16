@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.therepute.googlenews</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/willvalentine/soup_deployment/venv/bin/python</string>
+        <string>/Users/willvalentine/soup_deployment/main.py</string>
+    </array>
+    
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>PYTHONPATH</key>
+        <string>/Users/willvalentine/soup_deployment</string>
+    </dict>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/willvalentine/soup_deployment</string>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/willvalentine/soup_deployment/service.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/willvalentine/soup_deployment/error.log</string>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <true/>
+    
+    <key>ThrottleInterval</key>
+    <integer>300</integer>
+    
+    <key>StartInterval</key>
+    <integer>300</integer>
+</dict>
+</plist> 

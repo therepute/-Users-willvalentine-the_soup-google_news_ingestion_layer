@@ -2,33 +2,28 @@
 import schedule
 import time
 import logging
-from datetime import datetime
-from gmail_client import GmailClient
+from config_loader import ConfigLoader
 from alert_parser import AlertParser
+from gmail_client import GmailClient
 from soup_pusher import SoupPusher
 from dedupe_utils import DedupeUtils
-from config_loader import ConfigLoader
+from flask import Flask
+import threading
 
 # Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('logs/ingestion.log'),
-        logging.StreamHandler()
-    ]
-)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+# Initialize Flask app for health checks
+app = Flask(__name__)
+
 class GoogleAlertIngestor:
-    def __init__(self, toml_path=None):
-        # Load config from your existing TOML file
-        self.config_loader = ConfigLoader(toml_path)
-        
-        self.gmail_client = GmailClient(self.config_loader.get_gmail_config())
+    def __init__(self):
+        self.config = ConfigLoader()
+        self.gmail_client = GmailClient(self.config.get_gmail_config())
         self.parser = AlertParser()
-        self.soup_pusher = SoupPusher(self.config_loader.get_supabase_config())
-        self.deduper = DedupeUtils(self.config_loader.get_supabase_config())
+        self.soup_pusher = SoupPusher(self.config.get_supabase_config())
+        self.deduper = DedupeUtils(self.config.get_supabase_config())
         
     def run_ingestion(self):
         """Main ingestion process"""
@@ -67,7 +62,7 @@ class GoogleAlertIngestor:
                     success = self.soup_pusher.insert_article(article_data)
                     if success:
                         stats['articles_inserted'] += 1
-                        # DELETE email after successful import (not just mark as processed)
+                        # DELETE email after successful import
                         if self.gmail_client.delete_email(email['id']):
                             stats['emails_deleted'] += 1
                             logger.info(f"Article imported and email deleted: {article_data['headline']}")
@@ -75,91 +70,52 @@ class GoogleAlertIngestor:
                             logger.warning(f"Article imported but email deletion failed: {email['id']}")
                     
                 except Exception as e:
-                    logger.error(f"Error processing email {email.get('id', 'unknown')}: {str(e)}")
+                    logger.error(f"Error processing email: {str(e)}")
                     stats['errors'] += 1
             
-            # Log execution stats
-            logger.info(f"Ingestion complete: {stats}")
+            logger.info("Ingestion completed with stats:", extra=stats)
             return stats
             
         except Exception as e:
-            logger.error(f"Error during ingestion: {str(e)}")
-            return None
-    
-    def run_weekly_cleanup(self):
-        """Weekly cleanup of non-Google Alert emails"""
-        try:
-            logger.info("Starting weekly cleanup of non-Google Alert emails...")
-            
-            deleted_count = self.gmail_client.weekly_cleanup_non_google_alerts()
-            
-            logger.info(f"Weekly cleanup completed: {deleted_count} emails deleted")
-            return deleted_count
-            
-        except Exception as e:
-            logger.error(f"Error during weekly cleanup: {str(e)}")
-            return 0
-    
-    def run_daily_trash_purge(self):
-        """Daily purge of trash to permanently delete sensitive emails"""
-        try:
-            logger.info("Starting daily trash purge for security...")
-            
-            purged_count = self.gmail_client.daily_purge_trash()
-            
-            logger.info(f"Daily trash purge completed: {purged_count} emails permanently deleted")
-            return purged_count
-            
-        except Exception as e:
-            logger.error(f"Error during daily trash purge: {str(e)}")
-            return 0
-    
-    def get_system_stats(self):
-        """Get system statistics for monitoring"""
-        try:
-            email_stats = self.gmail_client.get_email_stats()
-            db_count = self.deduper.get_existing_articles_count()
-            
-            stats = {
-                'timestamp': datetime.now().isoformat(),
-                'gmail': email_stats,
-                'database_articles': db_count
-            }
-            
-            logger.info(f"System stats: {stats}")
-            return stats
-            
-        except Exception as e:
-            logger.error(f"Error getting system stats: {str(e)}")
+            logger.error(f"Error in ingestion process: {str(e)}")
             return None
 
+# Create global ingestor instance
+ingestor = GoogleAlertIngestor()
+
+@app.route('/health')
+def health_check():
+    """Health check endpoint"""
+    try:
+        # Test database connection
+        if not ingestor.soup_pusher.test_connection():
+            return 'Database connection failed', 500
+            
+        return 'Healthy', 200
+        
+    except Exception as e:
+        return str(e), 500
+
+def run_flask():
+    """Run Flask app in a separate thread"""
+    app.run(host='0.0.0.0', port=5000)
+
 def main():
-    # You can specify the path to your TOML file, or it will auto-detect
-    ingestor = GoogleAlertIngestor()
+    """Main function that sets up scheduling and runs the service"""
+    logger.info("Starting Google News Alert Service...")
     
-    # Schedule the ingestion to run every 15 minutes
-    schedule.every(15).minutes.do(ingestor.run_ingestion)
+    # Start Flask in a separate thread
+    flask_thread = threading.Thread(target=run_flask)
+    flask_thread.daemon = True
+    flask_thread.start()
     
-    # Schedule weekly cleanup every Sunday at 2 AM
-    schedule.every().sunday.at("02:00").do(ingestor.run_weekly_cleanup)
+    # Schedule ingestion to run every 5 minutes
+    schedule.every(5).minutes.do(ingestor.run_ingestion)
     
-    # Schedule daily trash purge at 3 AM for security
-    schedule.every().day.at("03:00").do(ingestor.run_daily_trash_purge)
-    
-    # Optional: Schedule daily stats logging
-    schedule.every().day.at("00:01").do(ingestor.get_system_stats)
-    
-    logger.info("Google News Alert Ingestor started with the following schedule:")
-    logger.info("- Ingestion: Every 15 minutes")
-    logger.info("- Weekly cleanup: Sundays at 2:00 AM")
-    logger.info("- Daily trash purge: Every day at 3:00 AM (SECURITY)")
-    logger.info("- System stats: Daily at 12:01 AM")
-    
-    # Run once immediately
-    logger.info("Running initial ingestion...")
+    # Run initial ingestion
     ingestor.run_ingestion()
     
-    # Keep the scheduler running
+    # Keep the script running
     while True:
         schedule.run_pending()
         time.sleep(1)
