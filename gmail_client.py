@@ -117,23 +117,52 @@ class GmailClient:
             logger.error(f"Error managing labels: {str(e)}")
             return None
     
-    def fetch_unprocessed_alerts(self):
-        """Fetch unprocessed Google News Alert emails"""
+    def fetch_unprocessed_alerts(self, max_emails=50):
+        """Fetch unprocessed Google News Alert emails with pagination support"""
         try:
             # Search for Google Alert emails that aren't processed
-            query = f'from:googlealerts-noreply@google.com -label:{self.processed_label_id}'
+            # Note: Gmail API has issues with combined from: and -label: queries
+            # Using -has:userlabels as a more reliable alternative
+            query = f'from:googlealerts-noreply@google.com -has:userlabels'
             
-            results = self.service.users().messages().list(
-                userId='me', q=query, maxResults=50).execute()
+            all_messages = []
+            page_token = None
             
-            messages = results.get('messages', [])
+            # Fetch emails across multiple pages until we have enough or run out
+            while len(all_messages) < max_emails:
+                query_params = {
+                    'userId': 'me',
+                    'q': query,
+                    'maxResults': min(100, max_emails - len(all_messages))  # Gmail API max is 500
+                }
+                
+                if page_token:
+                    query_params['pageToken'] = page_token
+                
+                results = self.service.users().messages().list(**query_params).execute()
+                messages = results.get('messages', [])
+                
+                if not messages:
+                    break  # No more emails
+                    
+                all_messages.extend(messages)
+                
+                # Check if there are more pages
+                page_token = results.get('nextPageToken')
+                if not page_token:
+                    break  # No more pages
+            
+            # Limit to requested amount
+            messages_to_process = all_messages[:max_emails]
+            
+            # Parse email metadata
             emails = []
-            
-            for message in messages:
+            for message in messages_to_process:
                 msg = self.service.users().messages().get(
                     userId='me', id=message['id'], format='full').execute()
                 emails.append(self._parse_email_metadata(msg))
                 
+            logger.info(f"Fetched {len(emails)} unprocessed emails from {len(all_messages)} available across multiple pages")
             return emails
             
         except Exception as e:

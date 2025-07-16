@@ -59,14 +59,11 @@ class NewsAlertIngestor:
         try:
             logger.info("Starting Google News Alert ingestion...")
             
-            # Get unread alerts
-            alerts = self.gmail_client.fetch_unprocessed_alerts()
+            # Get unread alerts with pagination support
+            alerts = self.gmail_client.fetch_unprocessed_alerts(max_emails=max_alerts)
             if not alerts:
                 logger.info("No new alerts found")
                 return
-            
-            # Process only max_alerts at a time
-            alerts = alerts[:max_alerts]
             logger.info(f"Found {len(alerts)} unprocessed alerts, processing {max_alerts} alerts")
             
             # Process each alert
@@ -90,12 +87,12 @@ class NewsAlertIngestor:
                 else:
                     logger.warning(f"Failed to send article to database: {article_data['headline']}")
                 
-                # DELETE email after processing (regardless of insert success/duplicate status)
-                if self.gmail_client.delete_email(email['id']):
+                # MARK email as processed (more reliable than deletion)
+                if self.gmail_client.mark_as_processed(email['id']):
                     self.stats['emails_deleted'] += 1
-                    logger.info(f"Email deleted: {article_data['headline']}")
+                    logger.info(f"Email marked as processed: {article_data['headline']}")
                 else:
-                    logger.warning(f"Failed to delete email: {article_data['headline']}")
+                    logger.warning(f"Failed to mark email as processed: {article_data['headline']}")
             
             # Log final stats
             logger.info(f"Ingestion complete. Stats: {self.stats}")
