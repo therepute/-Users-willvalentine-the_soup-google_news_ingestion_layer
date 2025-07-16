@@ -139,7 +139,7 @@ class AlertParser:
             if desc_div:
                 snippet = desc_div.get_text(strip=True)
                 break
-            
+        
             # Fallback: look for snippet in the remaining text
             text_content = container.get_text(separator=' ', strip=True)
             lines = text_content.split('\n')

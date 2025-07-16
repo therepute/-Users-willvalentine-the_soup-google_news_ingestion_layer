@@ -32,25 +32,38 @@ def test_publication_removal():
         # Push to database
         success = soup_pusher.insert_article(article_data)
         if success:
-            # Get the ID that was used
-            content_for_id = f"{article_data.get('headline', '')}{article_data.get('story_link', '')}"
-            article_id = hashlib.sha256(content_for_id.encode()).hexdigest()[:20]
-            processed_ids.append(article_id)
+            # Get the actual ID that was used by querying with permalink_url
+            permalink_url = article_data.get('story_link', '')
             
-            # Verify directly in database
+            # Query database to get the actual ID that was generated
             result = soup_pusher.supabase.table(soup_pusher.table_name)\
                 .select('id, publication')\
-                .eq('id', article_id)\
+                .eq('permalink_url', permalink_url)\
+                .order('created_at', desc=True)\
+                .limit(1)\
                 .execute()
             
             if result.data:
                 article = result.data[0]
-                logger.info(f"Article ID: {article['id']}")
+                article_id = article['id']
+                processed_ids.append(article_id)
+                
+                logger.info(f"Article ID: {article_id}")
                 logger.info(f"Publication value: {article['publication']}")
-                if article['publication'] is not None:
-                    logger.error(f"❌ Publication is not None for article {article['id']}")
+                
+                # Verify the new ID format
+                if article_id.startswith('GA_') and len(article_id.split('_')) == 4:
+                    logger.info(f"✅ ID follows new standardized format: {article_id}")
                 else:
-                    logger.info(f"✅ Publication is correctly None for article {article['id']}")
+                    logger.error(f"❌ ID does NOT follow new format: {article_id}")
+                
+                # Check publication field
+                if article['publication'] is not None:
+                    logger.error(f"❌ Publication is not None for article {article_id}")
+                else:
+                    logger.info(f"✅ Publication is correctly None for article {article_id}")
+            else:
+                logger.warning(f"Could not find inserted article with URL: {permalink_url}")
     
     logger.info("\nProcessed Article IDs for verification:")
     for article_id in processed_ids:

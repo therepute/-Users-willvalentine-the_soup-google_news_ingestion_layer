@@ -73,7 +73,7 @@ class GmailClient:
         if os.path.exists('token.pickle'):
             with open('token.pickle', 'rb') as token:
                 creds = pickle.load(token)
-        
+                
         # If there are no (valid) credentials available, let the user log in
         if not creds or not creds.valid:
             if creds and creds.expired and creds.refresh_token:
@@ -92,7 +92,7 @@ class GmailClient:
             # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
                 pickle.dump(creds, token)
-        
+                
         return build('gmail', 'v1', credentials=creds)
     
     def _get_or_create_label(self, label_name):

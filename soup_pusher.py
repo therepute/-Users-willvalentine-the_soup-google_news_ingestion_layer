@@ -3,8 +3,29 @@ from supabase import create_client, Client
 import logging
 from datetime import datetime
 import hashlib
+import uuid
+import threading
 
 logger = logging.getLogger(__name__)
+
+class IDGenerator:
+    def __init__(self):
+        self._counter = 0
+        self._lock = threading.Lock()
+        self._last_second = None
+    
+    def generate_id(self) -> str:
+        with self._lock:
+            now = datetime.utcnow()
+            current_second = now.strftime("%Y%m%d_%H%M%S")
+            
+            # Reset counter if new second
+            if current_second != self._last_second:
+                self._counter = 0
+                self._last_second = current_second
+            
+            self._counter += 1
+            return f"GA_{current_second}_{self._counter:06d}"
 
 class SoupPusher:
     def __init__(self, config):
@@ -12,6 +33,7 @@ class SoupPusher:
         self.key = config['key']
         self.supabase: Client = create_client(self.url, self.key)
         self.table_name = config.get('table_name', 'Soup_Dedupe')
+        self.id_generator = IDGenerator()  # Initialize the ID generator
     
     def test_connection(self):
         """Test database connection for health checks"""
@@ -49,13 +71,12 @@ class SoupPusher:
         Map article data to your Soup_Dedupe schema.
         Handles Gmail alert parsing format.
         """
-        # Create a hash for the ID (since id is primary key)
-        content_for_id = f"{article_data.get('headline', '')}{article_data.get('story_link', '')}"
-        article_id = hashlib.sha256(content_for_id.encode()).hexdigest()[:20]  # Shortened hash
+        # Generate standardized ID using the new format
+        standardized_id = self.id_generator.generate_id()
         
         # Map to your exact Soup_Dedupe schema
         return {
-            'id': article_id,                                    # Primary key (shortened hash)
+            'id': standardized_id,                               # NEW: Standardized GA_YYYYMMDD_HHMMSS_XXXXXX format
             'created_at': datetime.now().isoformat(),            # Current timestamp
             'title': article_data.get('headline', ''),           # Article headline
             'permalink_url': article_data.get('story_link', ''), # Article URL
@@ -71,7 +92,7 @@ class SoupPusher:
             'actor_name': None,                                  # Not available from Gmail alerts
             'actor_profile_url': None,                           # Not available from Gmail alerts
             'object_title': article_data.get('headline', ''),    # Same as title
-            'object_type': 'article',                           # Fixed value
+            'object_type': 'article',
             'subscription_source': f"GN_CL_{article_data.get('search', 'unknown')}", # GN_CL_[Search Term]
             'total_articles_count': None,                        # Will be set by trigger
             'daily_articles_count': None,                        # Will be set by trigger
