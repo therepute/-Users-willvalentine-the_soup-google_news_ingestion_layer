@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.therepute.googlenews</string>
+    
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/willvalentine/Soup_Google_News_Ingestion/-Users-willvalentine-the_soup-google_news_ingestion_layer/venv/bin/python</string>
+        <string>/Users/willvalentine/Soup_Google_News_Ingestion/-Users-willvalentine-the_soup-google_news_ingestion_layer/main.py</string>
+    </array>
+    
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>PYTHONPATH</key>
+        <string>/Users/willvalentine/Soup_Google_News_Ingestion/-Users-willvalentine-the_soup-google_news_ingestion_layer</string>
+    </dict>
+    
+    <key>WorkingDirectory</key>
+    <string>/Users/willvalentine/Soup_Google_News_Ingestion/-Users-willvalentine-the_soup-google_news_ingestion_layer</string>
+    
+    <key>StandardOutPath</key>
+    <string>/Users/willvalentine/Soup_Google_News_Ingestion/-Users-willvalentine-the_soup-google_news_ingestion_layer/service.log</string>
+    
+    <key>StandardErrorPath</key>
+    <string>/Users/willvalentine/Soup_Google_News_Ingestion/-Users-willvalentine-the_soup-google_news_ingestion_layer/error.log</string>
+    
+    <key>RunAtLoad</key>
+    <true/>
+    
+    <key>KeepAlive</key>
+    <dict>
+        <key>Crashed</key>
+        <true/>
+        <key>SuccessfulExit</key>
+        <false/>
+    </dict>
+    
+    <key>ThrottleInterval</key>
+    <integer>300</integer>
+    
+    <key>StartInterval</key>
+    <integer>300</integer>
+    
+    <key>ExitTimeOut</key>
+    <integer>60</integer>
+    
+    <key>OnDemand</key>
+    <false/>
+    
+    <key>ProcessType</key>
+    <string>Background</string>
+    
+    <key>Nice</key>
+    <integer>1</integer>
+    
+    <key>WatchPaths</key>
+    <array>
+        <string>/Users/willvalentine/Soup_Google_News_Ingestion/-Users-willvalentine-the_soup-google_news_ingestion_layer/error.log</string>
+    </array>
+    
+    <key>QueueDirectories</key>
+    <array>
+        <string>/Users/willvalentine/Soup_Google_News_Ingestion/-Users-willvalentine-the_soup-google_news_ingestion_layer/logs</string>
+    </array>
+    
+    <key>StartOnMount</key>
+    <true/>
+    
+    <key>UserName</key>
+    <string>willvalentine</string>
+    
+    <key>GroupName</key>
+    <string>staff</string>
+    
+    <key>InitGroups</key>
+    <true/>
+    
+    <key>LaunchOnlyOnce</key>
+    <false/>
+    
+    <key>HardResourceLimits</key>
+    <dict>
+        <key>NumberOfFiles</key>
+        <integer>4096</integer>
+    </dict>
+    
+    <key>SoftResourceLimits</key>
+    <dict>
+        <key>NumberOfFiles</key>
+        <integer>2048</integer>
+    </dict>
+    
+    <key>ExitTimeOut</key>
+    <integer>60</integer>
+    
+    <key>Umask</key>
+    <integer>22</integer>
+    
+    <key>AbandonProcessGroup</key>
+    <true/>
+    
+    <key>OnDemand</key>
+    <false/>
+    
+    <key>Debug</key>
+    <true/>
+    
+    <key>Disabled</key>
+    <false/>
+    
+    <key>ThrottleInterval</key>
+    <integer>300</integer>
+    
+    <key>StartInterval</key>
+    <integer>300</integer>
+    
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>3</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+</dict>
+</plist> 

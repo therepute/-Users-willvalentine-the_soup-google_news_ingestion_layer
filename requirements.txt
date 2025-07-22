@@ -1,0 +1,35 @@
+# Google API dependencies
+google-auth>=2.22.0
+google-auth-oauthlib>=1.0.0
+google-auth-httplib2>=0.1.0
+google-api-python-client>=2.95.0
+
+# Configuration
+toml>=0.10.2
+python-dotenv>=1.0.0
+
+# Database
+supabase>=1.0.0
+
+# HTML parsing
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+
+# HTTP requests
+requests>=2.31.0
+
+# Optional: Better logging
+structlog>=23.1.0
+
+# Web server for health checks
+flask==3.0.2
+
+# Testing
+pytest==8.0.0
+pytest-cov==4.1.0
+
+# Scheduling
+schedule==1.2.1
+
+# Date/Time handling
+pytz>=2024.1
