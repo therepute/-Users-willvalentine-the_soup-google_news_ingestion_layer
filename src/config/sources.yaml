@@ -1,0 +1,27 @@
+# Email Source Configuration
+# This file defines the email sources that the alert system will monitor
+
+email_sources:
+  google_alerts:
+    from_address: "googlealerts-noreply@google.com"
+    parser_type: "google"
+    enabled: true
+    description: "Google News Alert emails"
+    
+  # muck_rack:
+  #   from_address: "alerts@muckrack.com"  # TO BE CONFIRMED
+  #   parser_type: "muckrack"
+  #   enabled: false
+  #   description: "Muck Rack alert emails"
+
+# Global settings for email processing
+processing:
+  max_emails_per_run: 50
+  default_source: "Google Alert"
+  
+# Search query patterns for different sources
+search_patterns:
+  google_alerts:
+    query: "from:{from_address} -has:userlabels"
+  muck_rack:
+    query: "from:{from_address} -has:userlabels" 

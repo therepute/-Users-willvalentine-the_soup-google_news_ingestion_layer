@@ -3,11 +3,11 @@ import schedule
 import time
 import logging
 import os
-from config_loader import ConfigLoader
-from alert_parser import AlertParser
-from gmail_client import GmailClient
-from soup_pusher import SoupPusher
-from dedupe_utils import DedupeUtils
+from src.config.loader import ConfigLoader
+from src.parsers.google_parser import AlertParser
+from src.clients.gmail_client import GmailClient
+from src.database.soup_pusher import SoupPusher
+from src.database.dedupe_utils import DedupeUtils
 from flask import Flask
 import threading
 
