@@ -21,9 +21,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Import existing components
-from config_loader import ConfigLoader
-from soup_pusher import SoupPusher
-from dedupe_utils import DedupeUtils
+from src.config.loader import ConfigLoader
+from src.database.soup_pusher import SoupPusher
+from src.database.dedupe_utils import DedupeUtils
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

@@ -3,7 +3,7 @@
 
 import sys
 import traceback
-from config_loader import ConfigLoader
+from src.config.loader import ConfigLoader
 
 def test_config_loader():
     """Test if config loader works"""
@@ -11,10 +11,8 @@ def test_config_loader():
         print("🧪 Testing ConfigLoader...")
         config_loader = ConfigLoader()
         print("✅ ConfigLoader initialized successfully")
-        
         supabase_config = config_loader.get_supabase_config()
         print(f"✅ Supabase config loaded: {supabase_config}")
-        
         return config_loader, supabase_config
     except Exception as e:
         print(f"❌ ConfigLoader failed: {e}")
@@ -67,7 +65,7 @@ def test_soup_pusher():
         supabase_config = config_loader.get_supabase_config()
         
         # Try to import and initialize SoupPusher
-        from soup_pusher import SoupPusher
+        from src.database.soup_pusher import SoupPusher
         
         soup_pusher = SoupPusher(supabase_config)
         print("✅ SoupPusher initialized")

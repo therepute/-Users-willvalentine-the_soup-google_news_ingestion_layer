@@ -1,1 +1,327 @@
-/Users/willvalentine/soup_deployment/logs/ingestion.log
+/Users/willvalentine/soup_deployment/logs/ingestion.log2025-07-26 16:08:47,883 - INFO - Attempting OAuth authentication
+2025-07-26 16:08:47,885 - INFO - Starting OAuth flow
+2025-07-26 16:08:47,885 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-26 16:08:47,885 - INFO - Falling back to Service Account authentication
+2025-07-26 16:08:47,886 - INFO - Using Service Account authentication
+2025-07-26 16:08:47,889 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-26 16:08:47,975 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.122.224.145:5000
+2025-07-26 16:08:47,976 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-26 16:08:50,219 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-26 16:08:50,221 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-26 16:08:50,455 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-26 16:08:50,455 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-26 16:08:51,096 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-26 16:08:51,096 - INFO - - Ingestion: Every 15 minutes
+2025-07-26 16:08:51,096 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-26 16:08:51,096 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-26 16:08:51,096 - INFO - - System stats: Daily at 12:01 AM
+2025-07-26 16:08:51,097 - INFO - Running initial ingestion...
+2025-07-26 16:08:51,097 - INFO - Starting Google News Alert ingestion...
+2025-07-26 16:08:51,430 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-26 16:08:51,430 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-26 16:08:51,431 - INFO - No new alerts found
+2025-07-27 12:45:52,036 - INFO - Attempting OAuth authentication
+2025-07-27 12:45:52,037 - INFO - Starting OAuth flow
+2025-07-27 12:45:52,037 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 12:45:52,037 - INFO - Falling back to Service Account authentication
+2025-07-27 12:45:52,037 - INFO - Using Service Account authentication
+2025-07-27 12:45:52,043 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 12:45:52,084 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 12:45:52,085 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 12:45:54,525 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 12:45:54,525 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 12:45:54,946 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 12:45:54,946 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 12:45:55,622 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 12:45:55,623 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 12:45:55,623 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 12:45:55,623 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 12:45:55,623 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 12:45:55,623 - INFO - Running initial ingestion...
+2025-07-27 12:45:55,623 - INFO - Starting Google News Alert ingestion...
+2025-07-27 12:45:55,967 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 12:45:55,967 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 12:45:55,968 - INFO - No new alerts found
+2025-07-27 13:51:42,981 - INFO - Attempting OAuth authentication
+2025-07-27 13:51:42,982 - INFO - Starting OAuth flow
+2025-07-27 13:51:42,982 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 13:51:42,982 - INFO - Falling back to Service Account authentication
+2025-07-27 13:51:42,983 - INFO - Using Service Account authentication
+2025-07-27 13:51:42,989 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 13:51:43,019 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 13:51:43,019 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 13:51:45,633 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:51:45,633 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:51:45,988 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:51:45,988 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:51:46,621 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 13:51:46,621 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 13:51:46,621 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 13:51:46,621 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 13:51:46,621 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 13:51:46,621 - INFO - Running initial ingestion...
+2025-07-27 13:51:46,621 - INFO - Starting Google News Alert ingestion...
+2025-07-27 13:51:47,259 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:51:47,261 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:51:47,261 - INFO - No new alerts found
+2025-07-27 13:55:57,323 - INFO - Attempting OAuth authentication
+2025-07-27 13:55:57,324 - INFO - Starting OAuth flow
+2025-07-27 13:55:57,324 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 13:55:57,324 - INFO - Falling back to Service Account authentication
+2025-07-27 13:55:57,325 - INFO - Using Service Account authentication
+2025-07-27 13:55:57,329 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 13:55:57,371 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 13:55:57,371 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 13:55:59,806 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:55:59,806 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:56:00,156 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:56:00,157 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:56:00,821 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 13:56:00,821 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 13:56:00,821 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 13:56:00,821 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 13:56:00,822 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 13:56:00,822 - INFO - Running initial ingestion...
+2025-07-27 13:56:00,822 - INFO - Starting Google News Alert ingestion...
+2025-07-27 13:56:01,165 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:56:01,166 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:56:01,166 - INFO - No new alerts found
+2025-07-27 13:59:55,385 - INFO - Attempting OAuth authentication
+2025-07-27 13:59:55,387 - INFO - Starting OAuth flow
+2025-07-27 13:59:55,387 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 13:59:55,387 - INFO - Falling back to Service Account authentication
+2025-07-27 13:59:55,387 - INFO - Using Service Account authentication
+2025-07-27 13:59:55,391 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 13:59:55,423 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 13:59:55,423 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 13:59:57,971 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:59:57,971 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:59:58,314 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:59:58,314 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:59:58,952 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 13:59:58,952 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 13:59:58,953 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 13:59:58,953 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 13:59:58,953 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 13:59:58,953 - INFO - Running initial ingestion...
+2025-07-27 13:59:58,953 - INFO - Starting Google News Alert ingestion...
+2025-07-27 13:59:59,325 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 13:59:59,326 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 13:59:59,326 - INFO - No new alerts found
+2025-07-27 14:02:44,063 - INFO - Attempting OAuth authentication
+2025-07-27 14:02:44,063 - INFO - Starting OAuth flow
+2025-07-27 14:02:44,063 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 14:02:44,063 - INFO - Falling back to Service Account authentication
+2025-07-27 14:02:44,064 - INFO - Using Service Account authentication
+2025-07-27 14:02:44,068 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 14:02:44,099 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 14:02:44,100 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 14:02:46,396 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:02:46,396 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:02:46,988 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:02:46,988 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:02:47,657 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 14:02:47,657 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 14:02:47,657 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 14:02:47,657 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 14:02:47,657 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 14:02:47,657 - INFO - Running initial ingestion...
+2025-07-27 14:02:47,657 - INFO - Starting Google News Alert ingestion...
+2025-07-27 14:02:48,048 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:02:48,048 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:02:48,048 - INFO - No new alerts found
+2025-07-27 14:05:19,373 - INFO - Attempting OAuth authentication
+2025-07-27 14:05:19,374 - INFO - Starting OAuth flow
+2025-07-27 14:05:19,374 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 14:05:19,374 - INFO - Falling back to Service Account authentication
+2025-07-27 14:05:19,375 - INFO - Using Service Account authentication
+2025-07-27 14:05:19,380 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 14:05:19,413 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 14:05:19,413 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 14:05:21,468 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:05:21,469 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:05:21,812 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:05:21,812 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:05:22,441 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 14:05:22,441 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 14:05:22,441 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 14:05:22,442 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 14:05:22,442 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 14:05:22,442 - INFO - Running initial ingestion...
+2025-07-27 14:05:22,442 - INFO - Starting Google News Alert ingestion...
+2025-07-27 14:05:22,774 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:05:22,774 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:05:22,775 - INFO - No new alerts found
+2025-07-27 14:15:58,189 - INFO - Attempting OAuth authentication
+2025-07-27 14:15:58,190 - INFO - Starting OAuth flow
+2025-07-27 14:15:58,190 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 14:15:58,190 - INFO - Falling back to Service Account authentication
+2025-07-27 14:15:58,191 - INFO - Using Service Account authentication
+2025-07-27 14:15:58,196 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 14:15:58,230 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 14:15:58,230 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 14:16:01,212 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:16:01,213 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:16:01,591 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:16:01,591 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:16:02,282 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 14:16:02,283 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 14:16:02,283 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 14:16:02,284 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 14:16:02,284 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 14:16:02,284 - INFO - Running initial ingestion...
+2025-07-27 14:16:02,284 - INFO - Starting Google News Alert ingestion...
+2025-07-27 14:16:02,651 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:16:02,652 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:16:02,652 - INFO - No new alerts found
+2025-07-27 14:21:52,161 - INFO - Attempting OAuth authentication
+2025-07-27 14:21:52,161 - INFO - Starting OAuth flow
+2025-07-27 14:21:52,162 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 14:21:52,162 - INFO - Falling back to Service Account authentication
+2025-07-27 14:21:52,162 - INFO - Using Service Account authentication
+2025-07-27 14:21:52,168 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 14:21:52,203 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 14:21:52,204 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 14:21:55,159 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:21:55,159 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:21:56,125 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:21:56,125 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:21:56,792 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 14:21:56,793 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 14:21:56,793 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 14:21:56,794 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 14:21:56,794 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 14:21:56,794 - INFO - Running initial ingestion...
+2025-07-27 14:21:56,794 - INFO - Starting Google News Alert ingestion...
+2025-07-27 14:21:57,156 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 14:21:57,157 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 14:21:57,157 - INFO - No new alerts found
+2025-07-27 14:25:45,247 - INFO - 127.0.0.1 - - [27/Jul/2025 14:25:45] "[33mGET / HTTP/1.1[0m" 404 -
+2025-07-27 14:25:45,983 - INFO - 127.0.0.1 - - [27/Jul/2025 14:25:45] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-27 16:12:12,530 - INFO - Attempting OAuth authentication
+2025-07-27 16:12:12,531 - INFO - Starting OAuth flow
+2025-07-27 16:12:12,531 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 16:12:12,532 - INFO - Falling back to Service Account authentication
+2025-07-27 16:12:12,532 - INFO - Using Service Account authentication
+2025-07-27 16:12:12,539 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 16:12:12,572 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 16:12:12,572 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 16:12:14,807 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 16:12:14,807 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 16:12:15,156 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 16:12:15,157 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 16:12:15,839 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 16:12:15,840 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 16:12:15,840 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 16:12:15,840 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 16:12:15,840 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 16:12:15,840 - INFO - Running initial ingestion...
+2025-07-27 16:12:15,841 - INFO - Starting Google News Alert ingestion...
+2025-07-27 16:12:16,190 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 16:12:16,191 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 16:12:16,191 - INFO - No new alerts found
+2025-07-27 17:07:18,134 - INFO - Attempting OAuth authentication
+2025-07-27 17:07:18,135 - INFO - Starting OAuth flow
+2025-07-27 17:07:18,135 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 17:07:18,136 - INFO - Falling back to Service Account authentication
+2025-07-27 17:07:18,136 - INFO - Using Service Account authentication
+2025-07-27 17:07:18,147 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 17:07:18,190 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 17:07:18,190 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 17:07:20,617 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 17:07:20,618 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 17:07:20,871 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 17:07:20,871 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 17:07:21,548 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 17:07:21,548 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 17:07:21,549 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 17:07:21,549 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 17:07:21,549 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 17:07:21,550 - INFO - Running initial ingestion...
+2025-07-27 17:07:21,550 - INFO - Starting Google News Alert ingestion...
+2025-07-27 17:07:22,089 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 17:07:22,090 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 17:07:22,090 - INFO - No new alerts found
+2025-07-27 17:32:22,429 - INFO - Attempting OAuth authentication
+2025-07-27 17:32:22,430 - INFO - Starting OAuth flow
+2025-07-27 17:32:22,430 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 17:32:22,431 - INFO - Falling back to Service Account authentication
+2025-07-27 17:32:22,431 - INFO - Using Service Account authentication
+2025-07-27 17:32:22,440 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 17:32:22,446 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 17:32:22,446 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 17:32:25,808 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 17:32:25,809 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 17:32:26,401 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 17:32:26,401 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 17:32:27,074 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 17:32:27,075 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 17:32:27,075 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 17:32:27,075 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 17:32:27,076 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 17:32:27,076 - INFO - Running initial ingestion...
+2025-07-27 17:32:27,076 - INFO - Starting Google News Alert ingestion...
+2025-07-27 17:32:27,567 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 17:32:27,567 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 17:32:27,567 - INFO - No new alerts found
+2025-07-27 21:26:03,287 - INFO - Attempting OAuth authentication
+2025-07-27 21:26:03,288 - INFO - Starting OAuth flow
+2025-07-27 21:26:03,288 - ERROR - OAuth authentication failed: credentials.json file not found. Please download it from Google Cloud Console.
+2025-07-27 21:26:03,289 - INFO - Falling back to Service Account authentication
+2025-07-27 21:26:03,289 - INFO - Using Service Account authentication
+2025-07-27 21:26:03,297 - INFO - file_cache is only supported with oauth2client<4.0.0
+2025-07-27 21:26:03,302 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.59.13.145:5000
+2025-07-27 21:26:03,302 - INFO - [33mPress CTRL+C to quit[0m
+2025-07-27 21:26:22,316 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 21:26:22,316 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 21:26:23,307 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 21:26:23,307 - ERROR - Error managing labels: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/labels?alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 21:26:24,019 - INFO - Google News Alert Ingestor started with the following schedule:
+2025-07-27 21:26:24,019 - INFO - - Ingestion: Every 15 minutes
+2025-07-27 21:26:24,020 - INFO - - Weekly cleanup: Sundays at 2:00 AM
+2025-07-27 21:26:24,020 - INFO - - Daily trash purge: Every day at 3:00 AM (SECURITY)
+2025-07-27 21:26:24,020 - INFO - - System stats: Daily at 12:01 AM
+2025-07-27 21:26:24,020 - INFO - Running initial ingestion...
+2025-07-27 21:26:24,020 - INFO - Starting Google News Alert ingestion...
+2025-07-27 21:26:27,518 - WARNING - Encountered 403 Forbidden with reason "accessNotConfigured"
+2025-07-27 21:26:27,518 - ERROR - Error fetching emails: <HttpError 403 when requesting https://gmail.googleapis.com/gmail/v1/users/me/messages?q=from%3Agooglealerts-noreply%40google.com+-has%3Auserlabels&maxResults=10&alt=json returned "Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.". Details: "[{'message': 'Gmail API has not been used in project 890209906998 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/gmail.googleapis.com/overview?project=890209906998 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.', 'domain': 'usageLimits', 'reason': 'accessNotConfigured', 'extendedHelp': 'https://console.developers.google.com'}]">
+2025-07-27 21:26:27,518 - INFO - No new alerts found

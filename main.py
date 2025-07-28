@@ -108,19 +108,19 @@ class NewsAlertIngestor:
         logger.info("- Weekly cleanup: Sundays at 2:00 AM")
         logger.info("- Daily trash purge: Every day at 3:00 AM (SECURITY)")
         logger.info("- System stats: Daily at 12:01 AM")
-    
+
         logger.info("Running initial ingestion...")
         self.process_alerts(max_alerts=10)
-        
+
         # Schedule recurring tasks
         schedule.every(15).minutes.do(self.process_alerts, max_alerts=10)
         schedule.every().sunday.at("02:00").do(self.gmail_client.weekly_cleanup_non_google_alerts)
         schedule.every().day.at("03:00").do(self.gmail_client.daily_purge_trash)
         schedule.every().day.at("00:01").do(self.log_system_stats)
-        
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+
+        while True:
+            schedule.run_pending()
+            time.sleep(1)
     
     def log_system_stats(self):
         """Log system statistics"""
@@ -137,10 +137,10 @@ def health_check():
 
 if __name__ == "__main__":
     # Start Flask in a separate thread
+    print("the_soup-google_news_ingestion_layer main.py running")
     flask_thread = threading.Thread(target=lambda: app.run(host='0.0.0.0', port=5000))
     flask_thread.daemon = True
     flask_thread.start()
-    
     # Start the ingestor
     ingestor = NewsAlertIngestor()
     ingestor.run_scheduled_tasks()
