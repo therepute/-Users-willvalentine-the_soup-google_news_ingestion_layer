@@ -32,7 +32,7 @@ class SoupPusher:
         self.url = config['url']
         self.key = config['key']
         self.supabase: Client = create_client(self.url, self.key)
-        self.table_name = config.get('table_name', 'Soup_Dedupe')
+        self.table_name = 'soup_dedupe'  # Always use lowercase 'soup_dedupe'
         self.id_generator = IDGenerator()  # Initialize the ID generator
     
     def test_connection(self):
@@ -47,9 +47,9 @@ class SoupPusher:
             return False
     
     def insert_article(self, article_data):
-        """Insert article into Supabase Soup_Dedupe table"""
+        """Insert article into Supabase soup_dedupe table"""
         try:
-            # Map Gmail alert data to your Soup_Dedupe schema
+            # Map Gmail alert data to your soup_dedupe schema
             soup_record = self._map_to_soup_schema(article_data)
             
             result = self.supabase.table(self.table_name).insert(soup_record).execute()
